@@ -2,6 +2,8 @@
  * http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_3_C&lang=jp
  */
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.*;
 
 class Elem {
@@ -94,19 +96,55 @@ class Dll {
 }
 
 public class Main {
+	final boolean usesc = false;
 
 	void run() {
-		Scanner scan = new Scanner(System.in);
-		int n = scan.nextInt();
+		int n = 0;
+		Scanner sc = null;
+		BufferedReader br = null;
+		if (usesc) {
+			sc = new Scanner(System.in);
+			n = sc.nextInt();
+		} else {
+			br = new BufferedReader(new InputStreamReader(System.in));
+			try {
+				n = Integer.parseInt(br.readLine());
+			} catch (Exception e) {
+				System.exit(-1);
+			}
+		}
 		Dll dll = new Dll();
 		for (int i = 0; i < n; i++) {
-			String cmd = scan.next();
-			//int x = scan.nextInt();
+			String line = null;
+			String cmd = null;
+			int arg = 0;
+			if (usesc) {
+				cmd = sc.next();
+			} else {
+				try {
+					line = br.readLine();
+				} catch (Exception e) {
+					System.exit(-1);
+				}
+				String[] s = line.split(" ");
+				cmd = s[0];
+
+				arg = s.length == 2 ? Integer.parseInt(s[1]) : -1;
+			}
+
 			if (cmd.equals("insert")) {
-				dll.insert(scan.nextInt());
+				if (!usesc) {
+					dll.insert(arg);
+				} else {
+					dll.insert(sc.nextInt());
+				}
 			}
 			else if (cmd.equals("delete")) {
-				dll.delete(scan.nextInt());
+				if (!usesc) {
+					dll.delete(arg);
+				} else {
+					dll.delete(sc.nextInt());
+				}
 			}
 			else if (cmd.equals("deleteFirst")) {
 				dll.deleteFirst();
@@ -115,8 +153,6 @@ public class Main {
 				dll.deleteLast();
 			}
 			else System.out.println("ERROR");
-			//dll.print();
-			//System.out.println();
 		}
 		dll.print();
 		System.out.println();
