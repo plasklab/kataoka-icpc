@@ -1,7 +1,6 @@
 /*
  * http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=ALDS1_5_D&lang=jp
  *
- * Why isn't this accepted by JudgeInput#19 ???
  */
 
 import java.util.*;
@@ -9,7 +8,7 @@ import java.util.*;
 public class Main {
 
 	int[] A;
-	int count = 0;
+	long count = 0;
 
 	void merge(int left, int mid, int right) {
 		int n1 = mid - left;
